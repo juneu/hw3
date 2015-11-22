@@ -39,14 +39,16 @@ void calculate(double* p, const int N, double& mean, double& var){
     var=0;
     
     for(int i=0; i<N; i++){
-        mean=mean+p[i];
+        mean+=p[i]; //mean=mean+p[i]
     };
     
-    mean=mean/N;     // weil N ein int ist, darf man hier nicht (1/N)*mean rechnen und wir können aus N keinen double Wert machen, weil die Länge des Arrays immer ein Integer sein muss
+    mean/=N;     // weil N ein int ist, darf man hier nicht (1/N)*mean rechnen und wir können aus N keinen double Wert machen, weil die Länge des Arrays immer ein Integer sein muss
+    
+    // oder mean=(1.0/N)*mean bzw mean*=(1.0/N) oder mean=(1/double(N))*mean bzw mean*=(1/double(N))
     
     for(int i=0; i<N; i++){
-        var=pow((var-mean),2);
+        var+=pow((p[i]-mean),2); //var=var+pow((p[i]-mean),2);
     }
 
-    var=var/N;
+    var/=N; // das Gleiche wie var=var/N
 }
